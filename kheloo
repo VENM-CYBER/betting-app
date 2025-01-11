@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Betting App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .bet-section {
+            margin: 20px 0;
+        }
+        .bet-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .bet-section input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .bet-section button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .bet-section button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Betting App</h1>
+        <div class="bet-section">
+            <label for="amount">Enter Bet Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount in dollars">
+            <label for="choice">Choose Outcome:</label>
+            <input type="text" id="choice" placeholder="Enter 'Win' or 'Lose'">
+            <button onclick="placeBet()">Place Bet</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function placeBet() {
+            const amount = document.getElementById('amount').value;
+            const choice = document.getElementById('choice').value.toLowerCase();
+            const resultElement = document.getElementById('result');
+            if (!amount || isNaN(amount) || amount <= 0) {
+                resultElement.innerHTML = 'Please enter a valid amount.';
+                return;
+            }
+            if (choice !== 'win' && choice !== 'lose') {
+                resultElement.innerHTML = 'Please choose a valid outcome: "Win" or "Lose".';
+                return;
+            }
+            
+            const randomOutcome = Math.random() > 0.5 ? 'win' : 'lose';
+            if (choice === randomOutcome) {
+                resultElement.innerHTML = You chose ${choice} and you ${randomOutcome}! You win $${amount * 2}!;
+            } else {
+                resultElement.innerHTML = You chose ${choice} but the outcome was ${randomOutcome}. You lose $${amount}.;
+            }
+        }
+    </script>
+</body>
+</html>
